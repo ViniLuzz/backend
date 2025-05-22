@@ -124,7 +124,7 @@ app.post('/api/resumir-clausulas', express.json({limit: '2mb'}), async (req, res
     const prompt = `Receba a lista de cláusulas abaixo, separe-as em duas listas: "Cláusulas seguras" e "Cláusulas de risco". Para cada cláusula, gere um resumo curto e simples, sem explicação longa. Responda apenas com o JSON, sem explicações antes ou depois. Exemplo: { "seguras": [ { "titulo": "...", "resumo": "..." } ], "riscos": [ { "titulo": "...", "resumo": "..." } ] }.\n\nCláusulas:\n${clausulas}`;
 
     const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4o-mini',
       messages: [
         { role: 'system', content: 'Você é um assistente jurídico que classifica e resume cláusulas de contrato.' },
         { role: 'user', content: prompt }
@@ -168,8 +168,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
           quantity: 1,
         },
       ],
-      success_url: 'https://backend-production-ce11b.up.railway.app/?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'https://backend-production-ce11b.up.railway.app/cancel',
+      success_url: 'https://v0-new-project-yvod6wlah1y.vercel.app/?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'https://v0-new-project-yvod6wlah1y.vercel.app/cancel',
     });
     res.json({ url: session.url });
   } catch (err) {
