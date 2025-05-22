@@ -168,8 +168,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
           quantity: 1,
         },
       ],
-      success_url: 'https://8a90-186-250-204-132.ngrok-free.app/?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'https://8a90-186-250-204-132.ngrok-free.app/cancel',
+      success_url: 'https://backend-production-ce11b.up.railway.app/?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'https://backend-production-ce11b.up.railway.app/cancel',
     });
     res.json({ url: session.url });
   } catch (err) {
