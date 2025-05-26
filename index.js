@@ -84,13 +84,36 @@ app.post('/api/analisar-contrato', upload.single('file'), async (req, res) => {
     console.log('Texto extraído com sucesso, tamanho:', textoExtraido.length);
 
     // Prompt para o ChatGPT
-    const prompt = `Leia o texto abaixo de um contrato e destaque as cláusulas que podem ser de risco para o contratante, explicando cada uma delas de forma simples e leiga. Responda em tópicos.\n\nContrato:\n${textoExtraido}`;
+        const prompt = `Leia o texto abaixo de um contrato e destaque as cláusulas que podem ser de risco para o contratante, explicando cada uma delas de forma simples e leiga. Responda em tópicos.\n\nContrato:\n${textoExtraido}
+
+Antes de prosseguir com a análise, verifique se o texto contém elementos essenciais de um contrato:
+1. Identificação das partes contratantes
+2. Objeto do contrato
+3. Cláusulas com numeração ou identificação
+4. Termos jurídicos comuns em contratos
+5. Data e assinaturas (ou espaço para elas)
+
+Se o texto não apresentar características de um contrato jurídico válido, responda apenas com: "O texto fornecido não parece ser um contrato jurídico válido. Por favor, forneça um contrato real para análise."
+
+Se for um contrato válido, prossiga com a análise e destaque:
+1. Cláusulas que podem ser de risco para o contratante
+2. Explicação simples e leiga de cada cláusula identificada
+3. Possíveis abusos ou irregularidades
+4. Recomendações de atenção
+
+Responda em tópicos e mantenha um tom profissional e objetivo.
+
+Contrato para análise:
+${textoExtraido}`;
 
     console.log('Enviando para análise da IA');
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
-        { role: 'system', content: 'Você é um assistente jurídico que explica contratos em linguagem simples.' },
+        { 
+          role: 'system', 
+          content: 'Você é um assistente jurídico especializado em análise de contratos. Sua função é identificar contratos válidos e analisar suas cláusulas de forma objetiva e profissional. Você deve rejeitar qualquer texto que não seja um contrato jurídico válido.' 
+        },
         { role: 'user', content: prompt }
       ],
       max_tokens: 800,
