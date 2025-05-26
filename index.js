@@ -168,8 +168,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
           quantity: 1,
         },
       ],
-      success_url: 'https://v0-new-project-yvod6wlah1y.vercel.app/?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'https://v0-new-project-yvod6wlah1y.vercel.app/cancel',
+      success_url: 'https://app.naosefoda.com.br/?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'https://app.naosefoda.com.br/cancel',
     });
     res.json({ url: session.url });
   } catch (err) {
